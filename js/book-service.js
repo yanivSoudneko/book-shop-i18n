@@ -3,30 +3,33 @@ const KEY = 'books'
 var gBooks;
 var gBookTitles = ['Start with why ', 'The 5am club', 'How to Win Friends & Influence People', 'Zero to One']
 var gNextId = 1;
-var gSortBy = 'txt';
+var gSortBy = '';
+var  gPageIdx  =  0;
+const  PAGE_SIZE  = 8;
 
 _createBooks()
-const  PAGE_SIZE  =  5;
-var  gPageIdx  =  0;
 
+function changePage(diff) {
+    if (!gPageIdx) return;
+    gPageIdx += diff;
+    if (gPageIdx * PAGE_SIZE >= gBooks.length) {
+        gPageIdx = 0;
+    }
+}
 
 function getBooks() {
+    var books = gBooks
     var  startIdx  =  gPageIdx * PAGE_SIZE;    
-    var books = gBooks.slice(startIdx,  startIdx  +  PAGE_SIZE)
-    startIdx = getBooksSorted(gBooks)
-    return books
+    if (gSortBy) {
+        books = sortBooks()
+    }
+    return books.slice(startIdx, startIdx + PAGE_SIZE)
 }
 
 function setSort(sortBy) {
     gSortBy = sortBy;
 }
 
-function nextPage() {
-    gPageIdx++
-    if (gPageIdx * PAGE_SIZE >= gBooks.length) {
-        gPageIdx = 0
-    }
-}
 
 function getBookTitles() {
     return gBookTitles;
@@ -58,8 +61,7 @@ function updateRate(bookId, rate) {
 
 function updateBook(bookId, bookPrice) {
     var book = gBooks.find(function(book) {
-        console.log('book.id', book.id);
-        console.log('bookId', bookId);
+
         return book.id === bookId
     })
     if (!book.price) return
@@ -77,11 +79,11 @@ function addBook(name, price) {
 
 function _createBook(name = gBookTitles, price = getRandomIntInclusive(1, 30), rate = 0) {
     return {
-        id: gNextId++,
-        title: makeLorem(5),
+        id: makeId(),
+        name: makeLorem(5),
         price: price,
         author: makeLorem(2),
-        rate: rate
+        rate: 0
     }
 }
 
@@ -103,27 +105,25 @@ function _saveBooksToStorage() {
     saveToStorage(KEY, gBooks)
 }
 
-
-function getBooksSorted() {
-    if (gSortBy === gBooks.title) return _sortByTxt(gBooks);
-    else return _sortByNumber(gBooks);
+function updateBookRating(bookId, diff) {
+    var book = getBookById(bookId);
+    if (!book.rate && diff < 0 || book.rate === 5 && diff > 0) return book.rate;
+    book.rate += diff;
+    _saveBooksToStorage();
+    return book.rate;
 }
 
-function _sortByNumber() {
+function sortBooks() {
     return gBooks.sort(function(book1, book2) {
-        return book1.price - book2.price;
-    });
+        if (gSortBy === 'title' || gSortBy === 'id') {
+            console.log('book1', book1);
+            console.log('book2', book1);
+            return book1.name.localeCompare(book2.name)
+        }
+        return book1.price - book2.price
+    })
 }
 
-function _sortById() {
-    return gBooks.sort(function(book1, book2) {
-        return book1.id - book2.id;
-    });
-}
-
-
-function _sortByTxt() {
-    return gBooks.sort(function(book1, book2) {
-        return book1.title.localeCompare(book2.title);
-    });
+function updatePageIdx(currPageIdx) {
+    gPageIdx = currPageIdx
 }

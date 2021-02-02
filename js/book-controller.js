@@ -2,31 +2,30 @@
 
 function init() {
     console.log('hey');
+    doTrans()
+    render()
+}
+
+function render() {
     renderBooks()
-        // renderPages()
 }
 
 
-// function renderPages() {
-//     var pages = getBookTitles()
-//     var strHtmls = pages.map(function(page) {
-//         return `<button onclick="onNextPage()">${page}</button>`
-//     })
-//     document.querySelector('.pageList').innerHTML = strHtmls.join('')
-// }
 
 function renderBooks() {
     var books = getBooks()
     var strHTMLs = books.map(function(book) {
-        return `<tr><td>${book.id}</td>
-        <td>${book.title}</td><td>$${book.price}</td>
-        <td><button class="mainRead" onclick="onBookDetails('${book.id}')">Read</button>
-        <button class="mainUpdate" onclick="onUpdateBook(${book.id})">Update</button>
-        <button class="mainDelete" onclick="onRemoveBook(${book.id})">Delete</button></td>
+        return `
+        <tr><td>${book.id}</td>
+        <td>${book.name}</td>
+        <td>$${book.price}</td>
+        <td><button data-trans="btn-read" class="mainRead"  onclick="onBookDetails('${book.id}')">Read</button>
+        <button  data-trans="btn-update" class="mainUpdate"  onclick="onUpdateBook(${book.id})">Update</button>
+        <button data-trans="btn-delete" class="mainDelete"  onclick="onRemoveBook(${book.id})">Delete</button></td>
         </tr>`
     })
-
     document.querySelector('.books-container').innerHTML = strHTMLs.join('')
+    doTrans()
 }
 
 function onRemoveBook(bookId) {
@@ -75,24 +74,37 @@ function onCloseModal() {
 }
 
 function onUpdateRate(bookId) {
-    updateRate(bookId, rate)
+    var bookRate = updateBookRating(bookId, diff);
+    document.querySelector('.counter').innerText = bookRate;
     renderBooks()
 }
 
-function addRate() {
-    var elRate = document.querySelector('.rate')
-    if (elRate.innerText === '10') return
-    elRate.innerText++
+function onSetPage(elPage) {
+    var currPageIdx = +elPage.innerText - 1;
+    updatePageIdx(currPageIdx);
+    renderBooks()
+    console.log(gPageIdx);
 
 }
 
-function lowerRate() {
-    var elRate = document.querySelector('.rate')
-    if (elRate.innerText === '0') return
-    elRate.innerText--
-}
-
-function onNextPage() {
-    nextPage();
+function onChangePage(diff) {
+    changePage(diff);
     renderBooks();
+}
+
+function onSortList(sortBy) {
+    setSort(sortBy);
+    renderBooks();
+}
+
+function onSetLang(lang) {
+    setLang(lang)
+    if (lang === 'he') {
+        document.body.classList.add('rtl')
+    } else {
+        document.body.classList.remove('rtl')
+
+    }
+    doTrans()
+    render()
 }

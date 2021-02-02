@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+body.rtl {
+    direction: rtl;
+}
+
 body {
     background-image: linear-gradient(to right bottom, #bcc3ce, #9dabc1, #7f93b4, #617ba7, #42649a);
 }
