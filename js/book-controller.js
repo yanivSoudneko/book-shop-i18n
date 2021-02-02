@@ -18,10 +18,10 @@ function renderBooks() {
         return `
         <tr><td>${book.id}</td>
         <td>${book.name}</td>
-        <td>$${book.price}</td>
+        <td>${formatCurrency(book.price)}</td>
         <td><button data-trans="btn-read" class="mainRead"  onclick="onBookDetails('${book.id}')">Read</button>
         <button  data-trans="btn-update" class="mainUpdate"  onclick="onUpdateBook(${book.id})">Update</button>
-        <button data-trans="btn-delete" class="mainDelete"  onclick="onRemoveBook(${book.id})">Delete</button></td>
+        <button data-trans="btn-delete" class="mainDelete"  onclick="onRemoveBook('${book.id}')">Delete</button></td>
         </tr>`
     })
     document.querySelector('.books-container').innerHTML = strHTMLs.join('')
@@ -75,7 +75,7 @@ function onCloseModal() {
 
 function onUpdateRate(bookId) {
     var bookRate = updateBookRating(bookId, diff);
-    document.querySelector('.counter').innerText = bookRate;
+    // document.querySelector('.counter').innerText = bookRate;
     renderBooks()
 }
 

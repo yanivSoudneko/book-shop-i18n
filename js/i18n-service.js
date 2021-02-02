@@ -42,6 +42,10 @@ var gTrans = {
     add: {
         en: 'Add',
         he: 'הוסף'
+    },
+    'rate-me': {
+        en: 'rate',
+        he: 'דירוג'
     }
 }
 
@@ -84,7 +88,12 @@ function formatNum(num) {
 }
 
 function formatCurrency(num) {
-    return new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS' }).format(num);
+    if (gCurrLang === 'en') {
+        return new Intl.NumberFormat('en-us', { style: 'currency', currency: 'USD' }).format(num);
+    } else {
+        return new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS' }).format(num);
+
+    }
 }
 
 function formatDate(time) {
