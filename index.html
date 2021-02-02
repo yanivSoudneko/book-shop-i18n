@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <title>Book shop</title>
+</head>
+
+<body onload="init()">
+    <h1>Welcome to my bookshop</h1>
+    <form class="addBook">
+        <input type="text" class="BookName" placeholder="Book name" name="BookName" required>
+        <input type="number" placeholder="price" name="bookPrice" required>
+        <button class="myButton" onclick="onAddBook()">Add</button>
+    </form>
+    <div class="pageList"> </div>
+    <table class="main-container">
+        <thead>
+            <tr>
+                <td name="mainId " class="head sort " onclick="onSetSort('id') ">Id</td>
+                <td name="mainTitle " class="head sort" onclick="onSetSort('title')">Title</td>
+                <td name="mainPrice " class="head sort" onclick="onSetSort('price')">Price</td>
+                <td class="head">Actions</td>
+            </tr>
+        </thead>
+        <tbody class="books-container"></tbody>
+    </table>
+    <!-- <div class="modal" hidden>
+        <h3></h3>
+        <p></p>
+        <button onclick="onCloseModal()">Close</button> -->
+    <div class="modal" hidden>
+        <div class="popup-inner">
+            <div class="popup__photo">
+                <img src="https://images.unsplash.com/photo-1515224526905-51c7d77c7bb8?ixlib=rb-0.3.5&s=9980646201037d28700d826b1bd096c4&auto=format&fit=crop&w=700&q=80" alt="">
+            </div>
+            <div class="popup__text">
+                <h3>Lorem ipsum dolor sit amet</h3>
+                <p></p>
+                <button class="high" onclick="addRate()">  + </button>
+                <span class="rate">0</span>
+                <button class="low" onclick="lowerRate()">-</button>
+                <input type="submit" class="rate" value="rate" onclick="onCloseModal()">
+            </div>
+            <a class="popup__close" onclick="onCloseModal()">X</a>
+        </div>
+    </div>
+    </div>
+    <!-- </div> -->
+
+
+    <script src="js/util-service.js"></script>
+    <script src="js/storage-service.js"></script>
+    <script src="js/book-service.js"></script>
+    <script src="js/book-controller.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Imbue:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(to right bottom, #bcc3ce, #9dabc1, #7f93b4, #617ba7, #42649a);
+}
+
+h1 {
+    font-family: 'Imbue', serif;
+    text-align: center;
+    color: lightblue;
+}
+
+.myButton,
+.high,
+.low,
+.rate {
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid transparent;
+    margin-right: 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    color: #000000;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: #42cc8c;
+    text-align: center;
+    transition: all 0.15s;
+    margin: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.myButton:hover,
+input[name="BookName"]:hover,
+input[name="bookPrice"]:hover,
+.mainRead:hover,
+.mainUpdate:hover,
+.mainDelete:hover {
+    font-family: 'Crimson Text', serif;
+    text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+    color: #FFFFFF;
+    border-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+@media all and (max-width:30em) {
+    .myButton {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+input[name="BookName"] {
+    position: relative;
+    font-size: 1em;
+    background: linear-gradient(21deg, #10abff, #1beabd);
+    padding: 3px;
+    display: inline-block;
+    border-radius: 9999em;
+    outline: none;
+}
+
+input[name="bookPrice"] {
+    position: relative;
+    font-size: 1em;
+    background: linear-gradient(21deg, #10abff, #1beabd);
+    padding: 3px;
+    display: inline-block;
+    border-radius: 9999em;
+    outline: none;
+}
+
+.head {
+    text-shadow: -9px 8px 2px rgba(150, 150, 150, 1);
+    /* background-color: black; */
+}
+
+.mainRead,
+.mainUpdate,
+.mainDelete {
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid transparent;
+    margin-right: 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    color: #000000;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: #32c7c7;
+    text-align: center;
+    transition: all 0.15s;
+    outline: none;
+}
+
+.mainUpdate {
+    background-color: #d3e01c;
+}
+
+.mainDelete {
+    background-color: #e64040;
+}
+
+table {
+    margin-top: 30px;
+    text-align: center;
+}
+
+td {
+    font-family: 'Crimson Text', serif;
+    background-color: lightblue;
+    border: 2px solid transparent;
+    width: 400px;
+    height: 50px;
+}
+
+.rate {
+    text-align: center;
+}
